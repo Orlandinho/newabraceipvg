@@ -44,6 +44,6 @@ class Patient extends Model
 
     public function address()
     {
-        return $this->hasOne(Patient::class);
+        return $this->hasOne(Address::class);
     }
 }

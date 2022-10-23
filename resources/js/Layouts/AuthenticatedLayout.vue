@@ -20,15 +20,18 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('patient.index')">
                                     <ApplicationLogo class="block h-9 w-auto" />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                <NavLink :href="route('patient.index')" :active="!!(route().current('patient.index') || route().current('patient.show'))">
+                                    Pacientes
+                                </NavLink>
+                                <NavLink :href="route('patient.create')" :active="route().current('patient.create')">
+                                    Cadastrar
                                 </NavLink>
                             </div>
                         </div>
@@ -73,8 +76,11 @@ const showingNavigationDropdown = ref(false);
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                        <ResponsiveNavLink :href="route('patient.index')" :active="!!(route().current('patient.index') || route().current('patient.show'))">
+                            Pacientes
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('patient.create')" :active="route().current('patient.create')">
+                            Cadastrar
                         </ResponsiveNavLink>
                     </div>
 
