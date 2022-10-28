@@ -18,8 +18,7 @@ class Patient extends Model
     ];
 
     protected $hidden = [
-        'dob',
-        'create_at',
+        'created_at',
         'updated_at'
     ];
 

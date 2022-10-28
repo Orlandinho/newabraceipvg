@@ -4,18 +4,23 @@ import BreezeLabel from '@/components/InputLabel.vue';
 import BreezeInput from '@/components/TextInput.vue';
 import BreezeInputError from '@/components/InputError.vue';
 import BreezeButton from '@/Components/PrimaryButton.vue'
-import { Head, useForm, usePage } from '@inertiajs/inertia-vue3';
+import { Head, useForm, usePage, Link } from '@inertiajs/inertia-vue3';
 import { useAlerts } from "@/Composables/useAlerts";
 import {ref} from "vue";
 
+const props = defineProps({
+    patient: Object
+})
+
 const form = useForm({
-    name: '',
-    dob: '',
-    email: '',
-    zipcode: '',
-    street: '',
-    region: '',
-    city: ''
+    id: props.patient.id,
+    name: props.patient.name,
+    dob: props.patient.dob,
+    email: props.patient.email,
+    zipcode: props.patient.address.zipcode,
+    street: props.patient.address.street,
+    region: props.patient.address.region,
+    city: props.patient.address.city
 })
 
 let placeholderText = ref('')
@@ -49,7 +54,7 @@ const onlyNumber = (e) => {
 }
 
 const submit = () => {
-    form.post(route('patient.store'), {
+    form.put(route('patient.update', props.patient.id), {
         onSuccess: () => {
             form.reset()
             let alert = useAlerts('Sucesso', usePage().props.value.flash.success, 'success')
@@ -66,7 +71,7 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Novo Cadastro" />
+    <Head title="Alualização de Cadastro" />
 
     <BreezeAuthenticatedLayout>
 
@@ -171,11 +176,15 @@ const submit = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="px-4 py-3 bg-gray-50 sm:px-6">
+                            <div class="px-4 space-x-2 py-3 bg-gray-50 sm:px-6">
                                 <BreezeButton :class="{ 'opacity-25': form.processing }"
                                               :disabled="form.processing">
-                                    Salvar
+                                    Atualizar
                                 </BreezeButton>
+
+                                <Link :href="route('patient.index')" role="button" class="inline-flex items-center px-4 py-2 bg-white border border-red-500 rounded-md font-semibold text-xs text-red-500 uppercase tracking-widest hover:bg-red-500 hover:text-white active:bg-red-900 focus:outline-none border-red-500 focus:shadow-outline-red transition ease-in-out duration-150">
+                                    Cancelar
+                                </Link>
                             </div>
                         </div>
                     </div>

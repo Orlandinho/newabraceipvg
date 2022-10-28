@@ -26,8 +26,8 @@ class PatientRequest extends FormRequest
         return [
             'name' => ['required', 'max:60'],
             'dob' => ['required','date_format:Y-m-d','before_or_equal:' . now()->format('Y-m-d')],
-            'email' => ['nullable', 'email'],
-            'zipcode' => ['min:8', 'max:8', 'required'],
+            'email' => ['nullable', 'email', 'max:255'],
+            'zipcode' => ['min:8', 'max:8', 'required', 'regex:/^(\d){8}$/'],
             'street' => ['required', 'max:255'],
             'region' => ['required', 'max:255'],
             'city' => ['required', 'max:255']

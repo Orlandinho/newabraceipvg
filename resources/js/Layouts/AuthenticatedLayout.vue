@@ -27,7 +27,7 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('patient.index')" :active="!!(route().current('patient.index') || route().current('patient.show'))">
+                                <NavLink :href="route('patient.index')" :active="!!(route().current('patient.index') || route().current('patient.show')) || route().current('patient.edit')">
                                     Pacientes
                                 </NavLink>
                                 <NavLink :href="route('patient.create')" :active="route().current('patient.create')">

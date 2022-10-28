@@ -28,7 +28,8 @@ return [
         ],
         'zipcode' => [
             'min' => 'O CEP não deve ser menor do que :min dígitos',
-            'max' => 'O CEP não deve ser maior do que :max dígitos'
+            'max' => 'O CEP não deve ser maior do que :max dígitos',
+            'regex' => 'O CEP deve ser composto apenas por números'
         ],
         'street' => [
             'required' => 'O nome da rua é obrigatório'

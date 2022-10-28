@@ -51,4 +51,47 @@ class PatientController extends Controller
         $patient->load('address');
         return inertia('Patient/Show', compact('patient'));
     }
+
+    public function edit(Patient $patient)
+    {
+        $patient->load('address');
+        return inertia('Patient/Edit', compact('patient'));
+    }
+
+    public function update(PatientRequest $request, Patient $patient)
+    {
+        $attributes = $request->validated();
+        try {
+            DB::transaction(function () use ($attributes, $patient) {
+                $patient->update([
+                    'name' => $attributes['name'],
+                    'dob' => $attributes['dob'],
+                    'email' => $attributes['email']
+                ]);
+
+                $patient->address()->update([
+                    'zipcode' => $attributes['zipcode'],
+                    'street' => $attributes['street'],
+                    'region' => $attributes['region'],
+                    'city' => $attributes['city'],
+                ]);
+            });
+
+            return redirect()->route('patient.create')->with('success', 'Dados cadastrados com sucesso');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['create' => 'Não foi possível finalizar o cadastro']);
+        }
+    }
+
+    public function destroy(Patient $patient)
+    {
+        try {
+            $patient->delete();
+            return redirect()->route('patient.index')->with('success', 'Registro apagado com sucesso!');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['create' => 'Não foi possível deletar o registro']);
+        }
+    }
 }
