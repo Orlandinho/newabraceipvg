@@ -10,7 +10,7 @@ class PatientController extends Controller
 {
     public function index()
     {
-        $patients = Patient::all();
+        $patients = Patient::orderBy('name')->paginate(8, ['id','name','dob']);
 
         return inertia('Patient/Index', compact('patients'));
     }

@@ -49,9 +49,9 @@ const confirm = () => {
                                         <ExclamationTriangleIcon class="h-6 w-6 text-red-600" aria-hidden="true" />
                                     </div>
                                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                        <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">Deactivate account</DialogTitle>
+                                        <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">Exclusão de Cadastro</DialogTitle>
                                         <div class="mt-2">
-                                            <p class="text-sm text-gray-500">Você está prestes a excluir as informações do <b>{{ patient.name }}</b> e essa ação será irreversível. Deseja prosseguir?</p>
+                                            <p class="text-sm text-gray-700">Você está prestes a excluir as informações de <b>{{ patient.name }}</b> e essa ação será irreversível. Deseja prosseguir?</p>
                                         </div>
                                     </div>
                                 </div>
