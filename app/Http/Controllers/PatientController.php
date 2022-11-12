@@ -10,9 +10,17 @@ class PatientController extends Controller
 {
     public function index()
     {
-        $patients = Patient::orderBy('name')->paginate(8, ['id','name','dob']);
+        $patients = Patient::query()
+            ->when(request()->input('search'), function($query, $search) {
+                $query->where('name','like', "%{$search}%");
+            })
+            ->orderBy('name')
+            ->paginate(8, ['id','name','dob'])
+            ->withQueryString();
 
-        return inertia('Patient/Index', compact('patients'));
+        $filters = request()->only(['search']);
+
+        return inertia('Patient/Index', compact('patients','filters'));
     }
 
     public function create()
