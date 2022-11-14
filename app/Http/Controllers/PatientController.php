@@ -20,6 +20,14 @@ class PatientController extends Controller
 
         $filters = request()->only(['search']);
 
+//        $patients = DB::table('patients')
+//            ->when(request()->input('search'), function($query, $search) {
+//                $query->where('name','like', "%{$search}%");
+//            })
+//            ->orderBy('name')
+//            ->paginate(8, ['id', 'name', DB::raw("DATE_FORMAT(dob,'%d/%m/%Y') as birthday"), DB::raw('floor(DATEDIFF(CURRENT_DATE(), dob) / 365.25) as age')])
+//            ->withQueryString();
+
         return inertia('Patient/Index', compact('patients','filters'));
     }
 
